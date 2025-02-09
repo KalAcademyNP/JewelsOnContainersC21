@@ -1,0 +1,34 @@
+networks:
+  frontend:
+  backend:
+
+services:
+  catalog:
+    image: jewels/catalogapi
+    build:
+      context: ./ProductCatalogAPI
+      dockerfile: Dockerfile
+    environment:
+      ConnectionString: "Data Source=mssqlserver;Initial Catalog=CatalogDb;User Id=sa;Password=ProductApi123(!);Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;"
+      ExternalBaseUrl: "http://localhost:7000"
+      ASPNETCORE_HTTP_PORTS: 80
+    ports:
+      - "7000:80"
+      - "7001:443"
+    container_name: jewelscatalogapi
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - mssqlserver
+
+  mssqlserver:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ProductApi123(!)
+    ports:
+      - "1448:1433"
+    container_name: jewelscatalogsqlserver
+    networks:
+      - backend

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3D3C0E6A-F131-4140-B004-0EEC03645171}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{52BC5953-0CF2-483E-8BCD-E2338045E5B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalogAPI", "ProductCatalogAPI\ProductCatalogAPI.csproj", "{9EFEFEB2-6C49-4F53-BDDF-52633297ED15}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{35E21914-E34A-43CC-ADA0-5D907C881BF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC\WebMVC.csproj", "{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{9EFEFEB2-6C49-4F53-BDDF-52633297ED15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EFEFEB2-6C49-4F53-BDDF-52633297ED15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EFEFEB2-6C49-4F53-BDDF-52633297ED15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E21914-E34A-43CC-ADA0-5D907C881BF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E21914-E34A-43CC-ADA0-5D907C881BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E21914-E34A-43CC-ADA0-5D907C881BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E21914-E34A-43CC-ADA0-5D907C881BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -29,5 +41,6 @@ Global
 		{21D157DC-F825-411E-BEF6-783C0742894A} = {3D3C0E6A-F131-4140-B004-0EEC03645171}
 		{52BC5953-0CF2-483E-8BCD-E2338045E5B6} = {3D3C0E6A-F131-4140-B004-0EEC03645171}
 		{9EFEFEB2-6C49-4F53-BDDF-52633297ED15} = {21D157DC-F825-411E-BEF6-783C0742894A}
+		{850B1FBF-0FEE-4ECB-8EF2-86C54F53AE71} = {52BC5953-0CF2-483E-8BCD-E2338045E5B6}
 	EndGlobalSection
 EndGlobal
