@@ -1,10 +1,12 @@
 using WebMVC.Infrastructure;
+using WebMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpClient, CustomHttpClient>();
+builder.Services.AddTransient<ICatalogService, CatalogService>();
 
 var app = builder.Build();
 
