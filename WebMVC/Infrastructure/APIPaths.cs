@@ -38,5 +38,20 @@
                 return preUri;
             }
         }
+        public static class Auth
+        {
+            public static string Register(string baseUri)
+            {
+                return $"{baseUri}/register";
+            }
+            public static string Login(string baseUri)
+            {
+                return $"{baseUri}/login";
+            }
+            public static string AssignRole(string baseUri)
+            {
+                return $"{baseUri}/AssignRole";
+            }
+        }
     }
 }
