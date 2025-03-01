@@ -73,5 +73,28 @@ namespace WebMVC.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(
+            RegistrationRequestDto registrationRequestDto)
+        {
+            var result = await _authService.RegisterAsync(registrationRequestDto);
+            if (result != null && result.IsSuccess)
+            {
+                TempData["success"] = "Registration successful!";
+                return RedirectToAction(nameof(Login));
+            }
+            else
+            {
+                TempData["error"] = result.Message;
+            }
+            return View(registrationRequestDto);
+        }
     }
+
 }

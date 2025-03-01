@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebMVC.Infrastructure;
+using WebMVC.Models;
 using WebMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpClient, CustomHttpClient>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<ITokenProvider, TokenProvider>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromHours(10);
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+    });
+
 
 var app = builder.Build();
 
@@ -22,11 +36,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Catalog}/{action=Index}");
 
 app.Run();

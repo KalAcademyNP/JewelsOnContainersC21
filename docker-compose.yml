@@ -50,6 +50,7 @@ services:
       dockerfile: Dockerfile
     environment:
       CatalogUrl: http://catalog
+      IdentityUrl: http://tokenserver
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 80
     ports:
@@ -59,6 +60,7 @@ services:
       - frontend
     depends_on:
       - catalog
+      - tokenserver
 
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server"
