@@ -28,7 +28,7 @@ services:
       context: ./AuthAPI
       dockerfile: Dockerfile
     environment:
-      ConnectionString: "Data Source=tokensqlserver;Initial Catalog=TokenServiceDb;User Id=sa;Password=TokenApi123(!);Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;"
+      ConnectionString: "Data Source=mssqlserver;Initial Catalog=TokenServiceDb;User Id=sa;Password=ProductApi123(!);Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;"
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 80
       JWT__Secret: "your_net_net_net_new_base64_encoded_key"
@@ -41,7 +41,7 @@ services:
       - frontend
       - backend
     depends_on:
-      - tokensqlserver
+      - mssqlserver
  
   cart:
     image: jewels/cartapi
@@ -73,6 +73,7 @@ services:
     environment:
       CatalogUrl: http://catalog
       IdentityUrl: http://tokenserver
+      CartUrl: http://cart
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 80
     ports:
@@ -83,6 +84,7 @@ services:
     depends_on:
       - catalog
       - tokenserver
+      - cart
 
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server"
@@ -94,17 +96,6 @@ services:
     container_name: jewelscatalogsqlserver
     networks:
       - backend
-
-  tokensqlserver:
-    image: "mcr.microsoft.com/mssql/server"
-    environment:
-      ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: TokenApi123(!)
-    ports:
-      - "1449:1433"
-    container_name: jewelstokensqlserver
-    networks:
-      - backend 
 
   basket.data:
     image: redis

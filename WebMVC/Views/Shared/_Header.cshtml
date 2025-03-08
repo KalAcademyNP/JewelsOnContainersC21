@@ -1,0 +1,11 @@
+﻿@model IEnumerable<WebMVC.ViewModels.Header>
+
+<div class="esh-header">
+    <div class="container">
+        @foreach (var header in @Model)
+        {
+            <a class="esh-header-back" asp-area="" asp-action="Index" 
+            asp-controller="@header.Controller">@header.Text</a>
+        }
+        </div>
+    </div>
