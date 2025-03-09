@@ -65,6 +65,28 @@ services:
       - tokenserver
       - basket.data
 
+  order:
+    image: jewels/orderapi
+    build:
+      context: ./OrderAPI
+      dockerfile: Dockerfile
+    environment:
+      ConnectionString: "Data Source=mssqlserver;Initial Catalog=OrderDb;User Id=sa;Password=ProductApi123(!);Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;"
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 80
+      JWT__Secret: "your_net_net_net_new_base64_encoded_key"
+      JWT__Issuer: "auth-api"
+      JWT__Audience: "auth-client"
+    ports:
+      - "7030:80"
+    container_name: jewelsorderapi
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - tokenserver
+      - mssqlserver
+
   webmvc:
     image: jewels/webmvc
     build:
