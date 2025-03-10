@@ -11,8 +11,9 @@ var configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<OrdersContext>(options => options.UseSqlServer(
-    configuration["ConnectionString"]));
+builder.Services.AddDbContext<OrdersDbContext>(
+    options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
 var settingsSection = configuration.GetSection("JWT");
 var secret = settingsSection.GetValue<string>("Secret");
 var issuer = settingsSection.GetValue<string>("Issuer");
@@ -89,7 +90,7 @@ void ApplyMigration()
 {
     using (var scope = app.Services.CreateScope())
     {
-        var _db = scope.ServiceProvider.GetRequiredService<OrdersContext>();
+        var _db = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
         if (_db.Database.GetPendingMigrations().Count() > 0)
         {
             _db.Database.Migrate();

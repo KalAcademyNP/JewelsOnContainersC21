@@ -3,9 +3,9 @@ using OrderAPI.Models;
 
 namespace OrderAPI.Data
 {
-    public class OrdersContext : DbContext
+    public class OrdersDbContext : DbContext
     {
-        public OrdersContext(DbContextOptions options) : base(options)
+        public OrdersDbContext(DbContextOptions<OrdersDbContext> options) : base(options)
         {
         }
 

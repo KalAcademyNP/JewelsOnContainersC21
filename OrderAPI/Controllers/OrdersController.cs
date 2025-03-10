@@ -13,10 +13,10 @@ namespace OrderAPI.Controllers
     [Authorize]
     public class OrdersController : ControllerBase
     {
-        private readonly OrdersContext _ordersContext;
+        private readonly OrdersDbContext _ordersContext;
         private readonly IConfiguration _config;
         private readonly ILogger<OrdersController> _logger;
-        public OrdersController(OrdersContext ordersContext,
+        public OrdersController(OrdersDbContext ordersContext,
             IConfiguration config,
             ILogger<OrdersController> logger)
         {
