@@ -13,7 +13,7 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddDbContext<OrdersDbContext>(
     options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Configuration["ConnectionString"]));
 var settingsSection = configuration.GetSection("JWT");
 var secret = settingsSection.GetValue<string>("Secret");
 var issuer = settingsSection.GetValue<string>("Issuer");

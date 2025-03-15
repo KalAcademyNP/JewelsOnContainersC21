@@ -96,6 +96,9 @@ services:
       CatalogUrl: http://catalog
       IdentityUrl: http://tokenserver
       CartUrl: http://cart
+      OrderUrl: http://order
+      StripePublicKey: pk_test_jZlpubvlPmcV6QJPReImelQy
+      StripePrivateKey: sk_test_bSHT9qxwjpyCOP0qdAvHLfAA
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 80
     ports:
@@ -107,6 +110,7 @@ services:
       - catalog
       - tokenserver
       - cart
+      - order
 
   mssqlserver:
     image: "mcr.microsoft.com/mssql/server"
