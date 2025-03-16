@@ -4,6 +4,8 @@ using StackExchange.Redis;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MassTransit;
+using CartAPI.Messaging.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -45,7 +47,25 @@ builder.Services.AddAuthentication(x =>
 });
 builder.Services.AddAuthorization();
 
+builder.Services.AddMassTransit(cfg =>
+{
+    cfg.AddConsumer<OrderCompletedEventConsumer>(); // Register the consumer
 
+    cfg.UsingRabbitMq((context, rmq) =>
+    {
+        rmq.Host("rabbitmq://rabbitmq", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        // Configuring a receive endpoint
+        rmq.ReceiveEndpoint("JewelsCartSDC21", e =>
+        {
+            e.ConfigureConsumer<OrderCompletedEventConsumer>(context);
+        });
+    });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -64,12 +64,19 @@ services:
     depends_on:
       - tokenserver
       - basket.data
+      - rabbitmq
 
   order:
     image: jewels/orderapi
     build:
       context: ./OrderAPI
       dockerfile: Dockerfile
+    logging:
+      driver: "json-file"
+      options: {
+        max-size: "200k",
+        max-file: "10"
+      }
     environment:
       ConnectionString: "Data Source=mssqlserver;Initial Catalog=OrderDb;User Id=sa;Password=ProductApi123(!);Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;"
       ASPNETCORE_ENVIRONMENT: Development
@@ -86,12 +93,19 @@ services:
     depends_on:
       - tokenserver
       - mssqlserver
+      - rabbitmq
 
   webmvc:
     image: jewels/webmvc
     build:
       context: ./WebMVC
       dockerfile: Dockerfile
+    logging:
+      driver: "json-file"
+      options: {
+        max-size: "200k",
+        max-file: "10"
+      }
     environment:
       CatalogUrl: http://catalog
       IdentityUrl: http://tokenserver
@@ -128,5 +142,16 @@ services:
     ports:
       - "7050:6379"
     container_name: basketdata
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3
+    container_name: rabbitmq
+    hostname: jewelsrabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
     networks:
       - backend
